@@ -9,6 +9,10 @@ Router.use(addModelsToRequest);
 Router.get('/users', userController.list);
 Router.post('/users', userController.create);
 Router.get('/users/:id', userController.show);
+Router.get('/test', async (req,res)=> {
+  console.log("test")
+  res.send({"test" : "test"})
+})
 
 Router.post('/login', userController.login);
 Router.delete('/logout', userController.logout);
@@ -17,7 +21,7 @@ Router.get('/me', userController.showMe);
 // These actions require authentication (only valid logged in users can do these things)
 // The checkAuthentication middleware will only run for these specified routes.
 Router.patch('/users/:id', checkAuthentication, userController.update);
-Router.get('/logged-in-secret', checkAuthentication, (req, res) => {
+Router.get('/logged-in-secret', checkAuthentication, (req, res) => { // how you test this in postman ? 
   res.send({ msg: 'The secret is: there is no secret.' });
 });
 
